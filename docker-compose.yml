@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: oficina-producao-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-oficina_producao}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-oficina_producao}
+      POSTGRES_DB: ${DB_DATABASE:-oficina_producao}
+    ports:
+      - '${DB_PORT:-5433}:5432'
+    volumes:
+      - oficina_producao_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USERNAME:-oficina_producao}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      target: production
+    container_name: oficina-producao-app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: ${DB_USERNAME:-oficina_producao}
+      DB_PASSWORD: ${DB_PASSWORD:-oficina_producao}
+      DB_DATABASE: ${DB_DATABASE:-oficina_producao}
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+    ports:
+      - '${PORT:-3001}:3001'
+
+volumes:
+  oficina_producao_postgres_data:
