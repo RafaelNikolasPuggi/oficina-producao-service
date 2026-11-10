@@ -35,8 +35,14 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-oficina_producao}
       DB_DATABASE: ${DB_DATABASE:-oficina_producao}
       JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+      # RabbitMQ roda no docker-compose do oficina-os-service (porta 5672
+      # publicada no host). host.docker.internal deixa este container
+      # alcançar o broker do outro compose project via o host.
+      RABBITMQ_URL: ${RABBITMQ_URL:-amqp://guest:guest@host.docker.internal:5672}
     ports:
       - '${PORT:-3001}:3001'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
 
 volumes:
   oficina_producao_postgres_data:

@@ -10,6 +10,10 @@ export interface AppConfig {
   jwt: {
     secret: string;
   };
+  rabbitmq: {
+    url: string;
+    queue: string;
+  };
 }
 
 export default (): AppConfig => ({
@@ -23,5 +27,9 @@ export default (): AppConfig => ({
   },
   jwt: {
     secret: process.env.JWT_SECRET ?? 'dev-secret-change-me',
+  },
+  rabbitmq: {
+    url: process.env.RABBITMQ_URL ?? 'amqp://guest:guest@localhost:5672',
+    queue: 'producao_queue',
   },
 });
