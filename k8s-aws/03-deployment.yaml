@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oficina-producao-app
+  namespace: oficina-producao
+  labels:
+    app: oficina-producao-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: oficina-producao-app
+  template:
+    metadata:
+      labels:
+        app: oficina-producao-app
+    spec:
+      imagePullSecrets:
+        - name: ghcr-pull-secret
+      containers:
+        - name: oficina-producao-app
+          image: ghcr.io/OWNER/oficina-producao-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3001
+          envFrom:
+            - configMapRef:
+                name: oficina-producao-app-config
+            - secretRef:
+                name: oficina-producao-app-secret
+          env:
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: newrelic-secret
+                  key: license-key
+                  optional: true
+          resources:
+            requests:
+              cpu: '100m'
+              memory: '128Mi'
+            limits:
+              cpu: '500m'
+              memory: '256Mi'
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3001
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3001
+            initialDelaySeconds: 20
+            periodSeconds: 15

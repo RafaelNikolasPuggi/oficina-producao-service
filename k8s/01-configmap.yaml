@@ -1,0 +1,14 @@
+# Variáveis NÃO sensíveis. Valores sensíveis (senhas, segredo do JWT) ficam
+# em 02-secret.yaml — nunca aqui.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oficina-producao-app-config
+  namespace: oficina-producao
+data:
+  NODE_ENV: 'production'
+  PORT: '3001'
+  DB_HOST: 'oficina-producao-postgres' # Service do Postgres provisionado pelo Terraform (ver /infra)
+  DB_PORT: '5432'
+  DB_DATABASE: 'oficina_producao'
+  RABBITMQ_URL: 'amqp://guest:guest@oficina-rabbitmq:5672'

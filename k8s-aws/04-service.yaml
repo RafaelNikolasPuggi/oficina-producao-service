@@ -1,0 +1,17 @@
+# ClusterIP — este serviço nunca é chamado de fora do cluster (só pelo
+# os-service, via rede interna), diferente do os-service/pagamento-service.
+apiVersion: v1
+kind: Service
+metadata:
+  name: oficina-producao-app
+  namespace: oficina-producao
+  labels:
+    app: oficina-producao-app
+spec:
+  type: ClusterIP
+  selector:
+    app: oficina-producao-app
+  ports:
+    - port: 80
+      targetPort: 3001
+      protocol: TCP
