@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: oficina-producao
+  labels:
+    app.kubernetes.io/part-of: oficina-producao-service
+---
+# Mesmo namespace compartilhado declarado pelos outros 2 microsserviços —
+# aplicar aqui de novo é idempotente (kubectl apply é um no-op se já existir
+# com o mesmo conteúdo), não importa qual repositório faça o deploy primeiro.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: oficina-shared
+  labels:
+    app.kubernetes.io/part-of: oficina-fase4-microservices
