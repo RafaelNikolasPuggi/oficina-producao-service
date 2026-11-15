@@ -250,6 +250,11 @@ jobs:
             exit 1
           }
 
+      - name: Garantir catálogo mínimo (servico + pecas de demonstração)
+        run: |
+          POD=$(kubectl -n oficina-producao get pods -l app=oficina-producao-app -o jsonpath='{.items[0].metadata.name}')
+          kubectl -n oficina-producao exec "$POD" -- node dist/seed/seed-catalogo.js
+
       - name: Reiniciar os pods se o secret do New Relic mudou (novo ou rotacionado)
         env:
           NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
