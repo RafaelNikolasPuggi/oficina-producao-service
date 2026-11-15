@@ -22,7 +22,7 @@ async function bootstrap() {
     getRepositoryToken(PecaOrmEntity),
   );
 
-  const servicoId = '11111111-1111-1111-1111-111111111111';
+  const servicoId = '11111111-1111-4111-8111-111111111111';
   if (!(await servicoRepo.findOne({ where: { id: servicoId } }))) {
     await servicoRepo.save(
       servicoRepo.create({
@@ -38,7 +38,7 @@ async function bootstrap() {
     console.log(`Serviço "${servicoId}" já existia.`);
   }
 
-  const pecaEstoqueOkId = '22222222-2222-2222-2222-222222222222';
+  const pecaEstoqueOkId = '22222222-2222-4222-8222-222222222222';
   if (!(await pecaRepo.findOne({ where: { id: pecaEstoqueOkId } }))) {
     await pecaRepo.save(
       pecaRepo.create({
@@ -54,7 +54,7 @@ async function bootstrap() {
     console.log(`Peça "${pecaEstoqueOkId}" já existia.`);
   }
 
-  const pecaEstoqueBaixoId = '33333333-3333-3333-3333-333333333333';
+  const pecaEstoqueBaixoId = '33333333-3333-4333-8333-333333333333';
   if (!(await pecaRepo.findOne({ where: { id: pecaEstoqueBaixoId } }))) {
     await pecaRepo.save(
       pecaRepo.create({
