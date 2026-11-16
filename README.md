@@ -1,5 +1,8 @@
 # oficina-producao-service
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=RafaelNikolasPuggi_oficina-producao-service&metric=coverage)](https://sonarcloud.io/summary/new_code?id=RafaelNikolasPuggi_oficina-producao-service)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=RafaelNikolasPuggi_oficina-producao-service&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=RafaelNikolasPuggi_oficina-producao-service)
+
 Microsserviço de **Catálogo de Serviços e Peças / Estoque** do sistema de gestão da oficina — Tech Challenge Fase 4 (POS TECH / SOAT).
 
 Parte de uma arquitetura de 3 microsserviços, cada um com seu próprio repositório e banco de dados:
