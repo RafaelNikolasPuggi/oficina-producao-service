@@ -1,7 +1,8 @@
 # oficina-producao-service
 
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=RafaelNikolasPuggi_oficina-producao-service2&metric=coverage)](https://sonarcloud.io/summary/new_code?id=RafaelNikolasPuggi_oficina-producao-service2)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=RafaelNikolasPuggi_oficina-producao-service2&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=RafaelNikolasPuggi_oficina-producao-service2)
+
+**Cobertura de testes: 91,33% de linhas** (gate obrigatório no CI, mínimo 80% — build falha abaixo disso). O SonarCloud roda em modo de análise automática, que não executa testes e por isso não reporta esse número em badge; a evidência real é o próprio [log do CI](https://github.com/RafaelNikolasPuggi/oficina-producao-service/actions/workflows/ci.yml), que imprime a cobertura a cada push, mais o artefato `coverage/` (relatório HTML) anexado a cada execução.
 
 Microsserviço de **Catálogo de Serviços e Peças / Estoque** do sistema de gestão da oficina — Tech Challenge Fase 4 (POS TECH / SOAT).
 
